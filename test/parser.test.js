@@ -4,7 +4,7 @@ describe("when parsing the input", () => {
     it("returns consumable data structure", () => {
         const expectedOutput = 
         {
-            size: {x: 5, y: 3},
+            gridSize: {x: 5, y: 3},
             bots: [
                 {
                     position: { x: 1, y: 1, orientation: 'E' },
@@ -33,4 +33,35 @@ LLFFFLFLFL`
         const result = parse(input);
         expect(result).toEqual(expectedOutput);
     })
+
+    // describe("when any input co-oridinate > 50 in the input", () => {
+    //     it("errors with bad input", () => {
+
+    //         const input = 
+    //     `5 3
+    //     1 1 E
+    //     RFRFRFRF
+    //     3 2 N
+    //     FRRFLLFFRRFLL
+    //     0 53 W
+    //     LLFFFLFLFL`
+    //     const result = parse(input);
+    //     expect(result).toError(expectedOutput);
+    // })
+    // if any coordinate > 50 - bad input
+
+     // describe("when instruction string > 100 chars in the input", () => {
+    //     it("errors with bad input", () => {
+
+    //         const input = 
+    //     `5 3
+    //     1 1 E
+    //     RFRFRFRF
+    //     3 2 N
+    //     FRRFLLFFRRFLLFRRFLLFFRRFLLFRRFLLFFRRFLLFRRFLLFFRRFLLFRRFLLFFRRFLLFRRFLLFFRRFLLFRRFLLFFRRFLLFRRFLLFFRR
+    //     0 53 W
+    //     LLFFFLFLFL`
+    //     const result = parse(input);
+    //     expect(result).toError(expectedOutput);
+    // })
 })

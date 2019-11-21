@@ -5,7 +5,8 @@ describe("the stuff", () => {
         const expectedOutput = 
 `1 1 E
 3 3 N LOST
-2 3 S`
+2 3 S
+`
         
         const input = 
 `5 3
@@ -20,7 +21,3 @@ LLFFFLFLFL`
         expect(result).toEqual(expectedOutput);
     })
 })
-
-// if any coordinate > 50 - bad input
-
-//All instruction strings will be less than 100 characters in length.
