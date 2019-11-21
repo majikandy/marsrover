@@ -47,4 +47,8 @@ LLFFFLFLFL`);
         expect(() => { parse('50 50\n50 51 E\nR') }).toThrow("Robot x, y must be within range 0-50")
         
     })
+    it('errors for robot commands greater that 100 chars', () => {
+        expect(() => { parse('1 1\n1 1 E\n' + 'R'.repeat(101)) })
+        .toThrow("Robots can have a maximum of 100 commands")      
+    })
 })

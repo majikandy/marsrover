@@ -36,6 +36,9 @@ const validate = (instructions) => {
     if (instructions.bots.some((b) => b.position.x > 50 || b.position.y > 50)) {
         throw new Error("Robot x, y must be within range 0-50")
     }
+    if (instructions.bots.some((b) => b.moves.length > 100)) {
+        throw new Error("Robots can have a maximum of 100 commands")
+    }
 } 
 
 module.exports = parse
