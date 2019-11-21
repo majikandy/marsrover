@@ -20,48 +20,31 @@ describe("when parsing the input", () => {
                 }
             ]
         }
-        
-        const input = 
+
+        const result = parse(
 `5 3
 1 1 E
 RFRFRFRF
 3 2 N
 FRRFLLFFRRFLL
 0 3 W
-LLFFFLFLFL`
+LLFFFLFLFL`);
 
-        const result = parse(input);
         expect(result).toEqual(expectedOutput);
     })
 
-    // describe("when any input co-oridinate > 50 in the input", () => {
-    //     it("errors with bad input", () => {
-
-    //         const input = 
-    //     `5 3
-    //     1 1 E
-    //     RFRFRFRF
-    //     3 2 N
-    //     FRRFLLFFRRFLL
-    //     0 53 W
-    //     LLFFFLFLFL`
-    //     const result = parse(input);
-    //     expect(result).toError(expectedOutput);
-    // })
-    // if any coordinate > 50 - bad input
-
-     // describe("when instruction string > 100 chars in the input", () => {
-    //     it("errors with bad input", () => {
-
-    //         const input = 
-    //     `5 3
-    //     1 1 E
-    //     RFRFRFRF
-    //     3 2 N
-    //     FRRFLLFFRRFLLFRRFLLFFRRFLLFRRFLLFFRRFLLFRRFLLFFRRFLLFRRFLLFFRRFLLFRRFLLFFRRFLLFRRFLLFFRRFLLFRRFLLFFRR
-    //     0 53 W
-    //     LLFFFLFLFL`
-    //     const result = parse(input);
-    //     expect(result).toError(expectedOutput);
-    // })
+    it('errors for bad format of instructions', () => {
+        expect(() => { parse('xxxx\nxxx') }).toThrow("Bad format of instruction set")
+    })
+    it('errors for grid outside range 0-50', () => {
+        expect(() => { parse(`51`) }).toThrow("Grid x, y must be within range 0-50")
+        expect(() => { parse('-1') }).toThrow("Grid x, y must be within range 0-50")
+        expect(() => { parse(`50 51`) }).toThrow("Grid x, y must be within range 0-50")
+        expect(() => { parse('0 -1') }).toThrow("Grid x, y must be within range 0-50")
+    })
+    it('errors for robot start position outside range 0-50', () => {
+        expect(() => { parse('50 50\n51 1 E\nR') }).toThrow("Robot x, y must be within range 0-50")
+        expect(() => { parse('50 50\n50 51 E\nR') }).toThrow("Robot x, y must be within range 0-50")
+        
+    })
 })

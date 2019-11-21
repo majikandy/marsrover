@@ -1,20 +1,17 @@
 const parse = require('./parse')
-const update = require('./update')
+const updateBoard = require('./updateBoard')
+const seralise = require('./serialiseFinalPositions')
+
+const util = require('util')
 
 const marsControl = {
     execute: (input) =>
     {
         const instructions = parse(input);
-
-        var output = "";
-        var lastRobotPosition = null
-        var lostRobots = []
-        instructions.bots.forEach(bot => {
-            lastRobotPosition = bot.moves.reduce((currentPos, move) => update(currentPos, move, instructions.gridSize, lostRobots), bot.position)
-            output += lastRobotPosition.x + " " + lastRobotPosition.y + " " + lastRobotPosition.orientation + (lastRobotPosition.lost?" LOST":"") + "\n";
-        });
-
-        return output
+        var result = instructions.bots.reduce((previousBots, currentBot) => updateBoard(currentBot, previousBots, instructions.gridSize), null)
+        //console.log(util.inspect(result,false, null, true))
+        //console.log(seralise(result))
+        return seralise(result)
     }
 }
 

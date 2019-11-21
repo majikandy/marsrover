@@ -1,12 +1,11 @@
 const marsControl = require('../src')
 
-describe("the stuff", () => {
+describe("the mars rover control", () => {
     it("reports the final position of the robots", () => {
         const expectedOutput = 
 `1 1 E
 3 3 N LOST
-2 3 S
-`
+2 3 S`
         
         const input = 
 `5 3
