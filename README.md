@@ -2,7 +2,17 @@
 
 # marsrover
 
-Introduction 
+To run
+```
+npm i
+npm test
+```
+
+Assumptions
+- Input and output are direct strings
+- Acceptance test is the only client of this code at the moment
+
+## Introduction 
 Think of this challenge as an opportunity to show us what “good” looks like to you; and a fun
 way to showcase your skills.
 Here are some tips and guidelines:

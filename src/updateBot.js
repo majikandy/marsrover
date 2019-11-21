@@ -1,39 +1,41 @@
 // (state, action) => newState
 const _ = require('underscore')
 
-const updateBot = (currentPosition, move, gridSize, lostRobots) => {
+const updateBot = (currentPosition, move, gridSize, lostRobotScents) => {
     if (currentPosition.lost === true) {
         return currentPosition
     }
     
     switch (move) {
         case 'F': 
-            var scentHere = lostRobots.some(function(lostRobot) { return _.isEqual(lostRobot, currentPosition)})
-            if (scentHere) {
+            if (hasScentAtCurrentPositionAndOrientation(lostRobotScents, currentPosition)) {
                 return currentPosition
             }
-            newPosition = forward(currentPosition)
-            
-            break
+
+            var position = forward(currentPosition)
+
+            position = setOldPositionAndLostIfOutsideGrid(position, currentPosition, gridSize)
+
+            return position
         case 'L': 
-            newPosition = {
-                ...currentPosition,
+            return { ...currentPosition,
                 orientation: left(currentPosition.orientation)
             }
-            break
         case 'R': 
-            newPosition = {
-                ...currentPosition,
+            return { ...currentPosition,
                 orientation: right(currentPosition.orientation)
             }
-            break
-        //NOTE: comment here for purpose of coding challenge, new commands behaviour would go here.
-        default: throw new Error("Direction " + move + " not supported.")
+        default: throw new Error("Direction " + move + " not (yet) supported.")
     }
+}
+
+const hasScentAtCurrentPositionAndOrientation = (scents, position) => {
+    return scents.some((lostRobot) => { return _.isEqual(lostRobot, position)})
+}
+
+const setOldPositionAndLostIfOutsideGrid = (newPosition, currentPosition, gridSize) => {
     if (newPosition.x > gridSize.x || newPosition.y > gridSize.y) {
-        newPosition = { ...currentPosition }
-        lostRobots.push(currentPosition)
-        newPosition.lost = true
+        newPosition = { ...currentPosition, lost: true }
     }
     return newPosition
 }
@@ -64,6 +66,5 @@ const right = (orientation) => {
         case 'W': return 'N'
     }
 }
-
 
 module.exports = updateBot
