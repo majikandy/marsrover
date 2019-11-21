@@ -1,62 +1,49 @@
 // (state, action) => newState
 const _ = require('underscore')
 
-const updateBot = (position, move, gridSize, lostRobots) => {
-    if (position.lost === true) {
-        return position
+const updateBot = (currentPosition, move, gridSize, lostRobots) => {
+    if (currentPosition.lost === true) {
+        return currentPosition
     }
     
     switch (move) {
         case 'F': 
-            var scentHere = lostRobots.some(function(lostRobot) { return _.isEqual(lostRobot, position)})
+            var scentHere = lostRobots.some(function(lostRobot) { return _.isEqual(lostRobot, currentPosition)})
             if (scentHere) {
-                return position
+                return currentPosition
             }
-
-            newPosition = {
-                ...position,
-                x: forwardX(position.x, position.orientation),
-                y: forwardY(position.y, position.orientation)
-            }
+            newPosition = forward(currentPosition)
+            
             break
         case 'L': 
             newPosition = {
-                ...position,
-                orientation: left(position.orientation)
+                ...currentPosition,
+                orientation: left(currentPosition.orientation)
             }
             break
         case 'R': 
             newPosition = {
-                ...position,
-                orientation: right(position.orientation)
+                ...currentPosition,
+                orientation: right(currentPosition.orientation)
             }
             break
+        //NOTE: comment here for purpose of coding challenge, new commands behaviour would go here.
         default: throw new Error("Direction " + move + " not supported.")
     }
     if (newPosition.x > gridSize.x || newPosition.y > gridSize.y) {
-        newPosition = { ...position }
-        lostRobots.push(position)
+        newPosition = { ...currentPosition }
+        lostRobots.push(currentPosition)
         newPosition.lost = true
     }
     return newPosition
 }
 
-
-const forwardX = (x, orientation) => {
-    switch (orientation) {
-        case 'N': return x
-        case 'E': return x + 1
-        case 'S': return x
-        case 'W': return x - 1
-    }
-}
-
-const forwardY = (y, orientation) => {
-    switch (orientation) {
-        case 'N': return y + 1
-        case 'E': return y
-        case 'S': return y - 1
-        case 'W': return y
+const forward = (position) => {
+    switch (position.orientation) {
+        case 'N': return {...position, y: position.y + 1}
+        case 'E': return {...position, x: position.x + 1}
+        case 'S': return {...position, y: position.y - 1}
+        case 'W': return {...position, x: position.x - 1}
     }
 }
 
