@@ -16,8 +16,8 @@ FRRFLLFFRRFLL
 0 3 W
 LLFFFLFLFL`
 
-        const result = marsControl.execute(input);
-        expect(result).toEqual(expectedOutput);
+        const result = marsControl.execute(input)
+        expect(result).toEqual(expectedOutput)
     })
 })
 
@@ -34,7 +34,7 @@ F
 0 0 S
 F`
 
-        const result = marsControl.execute(input);
-        expect(result).toEqual(expectedOutput);
+        const result = marsControl.execute(input)
+        expect(result).toEqual(expectedOutput)
     })
 })

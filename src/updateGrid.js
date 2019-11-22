@@ -23,7 +23,7 @@ const getLostBotScents = (bot, lostBots) =>
     if (bot.previousBot) {
         lostBots = getLostBotScents(bot.previousBot, lostBots)
     }
-    return lostBots;
+    return lostBots
 }
 
 module.exports = updateGrid

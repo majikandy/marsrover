@@ -2,7 +2,7 @@
 const _ = require('underscore')
 
 const updateBot = (currentPosition, move, gridSize, lostRobotScents) => {
-    if (currentPosition.lost === true) {
+    if (currentPosition.lost) {
         return currentPosition
     }
     
@@ -12,7 +12,7 @@ const updateBot = (currentPosition, move, gridSize, lostRobotScents) => {
                 return currentPosition
             }
 
-            var position = forward(currentPosition)
+            let position = forward(currentPosition)
 
             if (isOutsideGrid(position, gridSize)) {
                 position = { ...currentPosition, lost: true }
@@ -28,16 +28,14 @@ const updateBot = (currentPosition, move, gridSize, lostRobotScents) => {
     }
 }
 
-const hasScentAtCurrentPositionAndOrientation = (scents, position) => {
-    return scents.some((lostRobot) => { return _.isEqual(lostRobot, position)})
-}
+const hasScentAtCurrentPositionAndOrientation = (scents, position) => 
+    scents.some((lostRobot) => _.isEqual(lostRobot, position))
 
-const isOutsideGrid = (newPosition, gridSize) => {
-    return newPosition.x > gridSize.x || 
-           newPosition.y > gridSize.y || 
-           newPosition.x < 0 || 
-           newPosition.y < 0
-}
+const isOutsideGrid = (newPosition, gridSize) => 
+    newPosition.x > gridSize.x || 
+    newPosition.y > gridSize.y || 
+    newPosition.x < 0 || 
+    newPosition.y < 0
 
 const forward = (position) => {
     switch (position.orientation) {

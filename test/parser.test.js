@@ -28,16 +28,16 @@ RFRFRFRF
 3 2 N
 FRRFLLFFRRFLL
 0 3 W
-LLFFFLFLFL`);
+LLFFFLFLFL`)
 
-        expect(result).toEqual(expectedOutput);
+        expect(result).toEqual(expectedOutput)
     })
 
     it('errors for bad format of instructions', () => {
         expect(() => { parse('xxxx\nxxx') }).toThrow("Bad format of instruction set")
     })
     it('errors for grid outside range 0-50', () => {
-        expect(() => { parse(`51`) }).toThrow("Grid x, y must be within range 0-50")
+        expect(() => { parse(`51 0`) }).toThrow("Grid x, y must be within range 0-50")
         expect(() => { parse('-1') }).toThrow("Grid x, y must be within range 0-50")
         expect(() => { parse(`50 51`) }).toThrow("Grid x, y must be within range 0-50")
         expect(() => { parse('0 -1') }).toThrow("Grid x, y must be within range 0-50")

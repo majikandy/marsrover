@@ -1,11 +1,11 @@
 const serialise = (bot, outputString = '') =>
 {
-    if (bot.previousBot) {
-        outputString = serialise(bot.previousBot, outputString)
-    }
-    outputString += (bot.previousBot?"\n":"") + bot.finalPosition.x + " " + bot.finalPosition.y + " " + bot.finalPosition.orientation + (bot.finalPosition.lost?" LOST":"")
+    let stringToReturn = outputString
     
-    return outputString
+    if (bot.previousBot) {
+        stringToReturn = serialise(bot.previousBot, outputString)
+    }
+    return `${stringToReturn}${(bot.previousBot?"\n":"")}${bot.finalPosition.x} ${bot.finalPosition.y} ${bot.finalPosition.orientation}${bot.finalPosition.lost?" LOST":""}`
 }
 
 module.exports = serialise

@@ -1,20 +1,22 @@
 const parse = (input) => {
-    try {
-        var [rawGridSize, ...rawBots] = input.split('\n')
-        var [gridX, gridY] = rawGridSize.split(" ").map(Number)
-        
-        var bots = []
-        for (let i = 0; i < rawBots.length; i = i+2) {
-            bots.push(parseBot(rawBots[i], rawBots[i+1]));
-        }
+    let instructionsSet = {}
 
-        var instructionsSet =  {
+    try {
+        const [rawGridSize, ...rawBots] = input.split('\n')
+        const [gridX, gridY] = rawGridSize.split(" ").map(Number)
+        
+        const bots = rawBots.reduce((acc, rawBot, i) => 
+            (i % 2 === 0) ? [...acc, parseBot(rawBots[i], rawBots[i+1])] : acc, [])
+
+        instructionsSet =  {
             gridSize: {x: gridX, y: gridY},
             bots
         }
+        
     } catch {
         throw new Error("Bad format of instruction set")
     }
+    
     validate(instructionsSet)
     return instructionsSet
 }
