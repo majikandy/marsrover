@@ -1,4 +1,4 @@
-![](https://github.com/majikandy/marsrover/workflows/ci/badge.svg)
+[![](https://github.com/majikandy/marsrover/workflows/ci/badge.svg)](https://github.com/majikandy/marsrover/actions)
 
 # Mars Rover coding challenge
 
