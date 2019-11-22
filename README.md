@@ -1,6 +1,6 @@
 ![](https://github.com/majikandy/marsrover/workflows/ci/badge.svg)
 
-# marsrover
+# Mars Rover coding challenge
 
 To run
 ```
@@ -11,6 +11,8 @@ npm test
 Assumptions
 - Input and output are direct strings
 - Acceptance test is the only client of this code at the moment
+- Robots can avoid each other even if crossing the grid position of a previous robot
+
 
 ## Introduction 
 Think of this challenge as an opportunity to show us what “good” looks like to you; and a fun
@@ -26,7 +28,7 @@ Here are some tips and guidelines:
 - We should be able to run your code without any crazy steps
 - Secret tip: Make use of the sample data ;)
 
-Problem:  Martian  Robots 
+# Problem:  Martian  Robots 
 
 The  Problem 
 
@@ -67,7 +69,9 @@ The  Output
 For each robot position/instruction in the input, the output should indicate the final grid
 position and orientation of the robot. If a robot falls off the edge of the grid the word “LOST”
 should be printed after the position and orientation.
-Sample  Input
+
+Sample Input
+```
 5 3
 1 1 E
 RFRFRFRF
@@ -75,10 +79,10 @@ RFRFRFRF
 FRRFLLFFRRFLL
 0 3 W
 LLFFFLFLFL
+```
 Sample  Output
+```
 1 1 E
-Developer Programming Problem
-Red Badger Consulting Limited
-Page 2 of 3
 3 3 N LOST
 2 3 S
+```
