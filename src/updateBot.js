@@ -1,4 +1,4 @@
-// (state, action) => newState
+
 const _ = require('underscore')
 
 const updateBot = (currentPosition, move, gridSize, lostRobotScents) => {
@@ -34,7 +34,8 @@ const hasScentAtCurrentPositionAndOrientation = (scents, position) => {
 }
 
 const setOldPositionAndLostIfOutsideGrid = (newPosition, currentPosition, gridSize) => {
-    if (newPosition.x > gridSize.x || newPosition.y > gridSize.y) {
+    if (newPosition.x > gridSize.x || newPosition.y > gridSize.y || 
+        newPosition.x < 0 || newPosition.y < 0) {
         newPosition = { ...currentPosition, lost: true }
     }
     return newPosition
