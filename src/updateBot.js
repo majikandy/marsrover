@@ -14,16 +14,15 @@ const updateBot = (currentPosition, move, gridSize, lostRobotScents) => {
 
             var position = forward(currentPosition)
 
-            position = setOldPositionAndLostIfOutsideGrid(position, currentPosition, gridSize)
-
+            if (isOutsideGrid(position, gridSize)) {
+                position = { ...currentPosition, lost: true }
+            }
             return position
         case 'L': 
-            return { ...currentPosition,
-                orientation: left(currentPosition.orientation)
+            return { ...currentPosition, orientation: left(currentPosition.orientation)
             }
         case 'R': 
-            return { ...currentPosition,
-                orientation: right(currentPosition.orientation)
+            return { ...currentPosition, orientation: right(currentPosition.orientation)
             }
         default: throw new Error("Direction " + move + " not (yet) supported.")
     }
@@ -33,12 +32,11 @@ const hasScentAtCurrentPositionAndOrientation = (scents, position) => {
     return scents.some((lostRobot) => { return _.isEqual(lostRobot, position)})
 }
 
-const setOldPositionAndLostIfOutsideGrid = (newPosition, currentPosition, gridSize) => {
-    if (newPosition.x > gridSize.x || newPosition.y > gridSize.y || 
-        newPosition.x < 0 || newPosition.y < 0) {
-        newPosition = { ...currentPosition, lost: true }
-    }
-    return newPosition
+const isOutsideGrid = (newPosition, gridSize) => {
+    return newPosition.x > gridSize.x || 
+           newPosition.y > gridSize.y || 
+           newPosition.x < 0 || 
+           newPosition.y < 0
 }
 
 const forward = (position) => {
