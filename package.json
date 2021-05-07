@@ -16,6 +16,6 @@
     "prettier": "^1.19.1"
   },
   "dependencies": {
-    "underscore": "^1.9.1"
+    "underscore": "^1.12.1"
   }
 }
